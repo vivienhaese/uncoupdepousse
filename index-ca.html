@@ -1,0 +1,68 @@
+<!DOCTYPE HTML><!--
+	Landed by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> <html> <head> <title>jardiner Perpinyà 66 - Un Coup De Pousse</title> <meta http-equiv="content-type" content="text/html; charset=utf-8"> <meta name="description" content="El vostre jardí té menester de ser curat ? Necessita una ajuda puntual ?"> <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]--> <script src="js/scripts.js"></script> <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png"> <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png"> <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png"> <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png"> <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png"> <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png"> <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png"> <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png"> <link rel="icon" href="favicon.ico"> <link rel="alternate" hreflang="en" href="index-en.html"> <link rel="alternate" hreflang="fr" href="index.html"> <noscript><link rel="stylesheet" href="css/skel.css" /> <link rel="stylesheet" href="css/style.css" /> <link rel="stylesheet" href="css/style-xlarge.css" /></noscript> <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]--> <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]--> <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-60172877-1', 'auto');
+			ga('send', 'pageview');</script> <!-- Start jQuery code --> <script type="text/javascript">$(document).ready(function() {
+		    $("#submit").click(function() { 
+		        var proceed = true;
+		        //simple validation at client's end
+		        //loop through each field and we simply change border color to red for invalid fields       
+		        $("#news_form input[required=true], #news_form textarea[required=true]").each(function(){
+		            $(this).css('border-color',''); 
+		            if(!$.trim($(this).val())){ //if this field is empty 
+		                $(this).css('border-color','red'); //change border color to red   
+		                proceed = false; //set do not proceed flag
+		            }
+		            //check invalid email
+		            var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+		            if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
+		                $(this).css('border-color','red'); //change border color to red   
+		                proceed = false; //set do not proceed flag              
+		            }
+		        });
+		       
+		        if(proceed) //everything looks good! proceed...
+		        {
+		            //get input field values data to be sent to server
+		            var post_data = {
+		                'email' : $('input[name=email]').val()
+		            };
+		            
+		            //Ajax post data to server
+		            $.post('subscribe.php', post_data, function(response){  
+		            	var output = '';
+		                if(response.type == 'error'){ //load json data from server and output message     
+		                    output = '<div class="error">'+response.text+'</div>';
+		                }else{
+		                    output = '<div class="success">'+response.text+'</div>';
+		                    //reset values in all input fields
+		                    $("#news_form  input[required], #news_form textarea[required]").val(''); 
+		                    $("#news_form #news_body").slideUp(); //hide form after success
+		                }
+		                $("#news_form #news_results").hide().html(output).slideDown();
+		            }, 'json')
+		            .fail(function() {
+						alert( "error" );
+					});
+		        }
+		    });
+		    
+		    //reset previously set border colors and hide all message on .keyup()
+		    $("#news_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
+		        $(this).css('border-color',''); 
+		        $("#news_result").slideUp();
+		    });
+		});</script>  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle = window.adsbygoogle || []).push({
+	google_ad_client: "ca-pub-1476264766102370",
+	enable_page_level_ads: true
+	});</script> <body class="landing"> <!-- Header --> <header id="header"> <h1 id="logo"><a href="index.html">Un Coup De Pousse</a></h1> <nav id="nav"> <ul> <li><a href="index-ca.html">Accolliment</a></li> <li><a href="#newsletter">Newsletter</a></li> <li><a href="sap.html">50% deductible !</a></li> <li><a href="contact-ca.html" class="button special">Contactar-me</a></li> </ul> </nav> </header> <!-- Banner --> <section id="banner"> <div class="content"> <header> <h2>El vostre jardí té menester de ser curat ?</h2> <p><strong>Necessita una ajuda puntual ?</strong><br> Crida ‘m per a les seves feines d’exterior al voltant de perpinyà.<br> Per a més informacions, contacti Romain al 06 30 14 93 23.</p> <a href="index-ca.html"><i class="flag flag-catalonia"></i></a> <a href="index.html"><i class="flag flag-fr"></i></a> <a href="index-en.html"><i class="flag flag-gb"></i></a> </header> <span class="image"><img src="images/pic01.jpg" alt=""></span> <div style="text-align:center; padding-top:30px"> <img src="images/sap.png" alt=""><br> <!-- Facebook Like Badge START --> <iframe src="http://www.facebook.com/plugins/like.php?href=https://www.facebook.com/uncoupdepousse&layout=box_count&show_faces=true&width=65&action=like&font=arial&colorscheme=light&height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:65px; height:65px; margin-top:3px" allowtransparency="true"> </iframe> <!-- Facebook Like Badge END --> </div> </div> <a href="#one" class="goto-next scrolly">Next</a> </section> <!-- One --> <section id="one" class="spotlight style1 bottom"> <span class="image fit main"><img src="images/pic02.jpg" alt=""></span> <div class="content"> <div class="container"> <div class="row"> <div class="4u 12u$(medium)"> <header> <h2>Una ajuda puntal</h2> </header> </div> <div class="4u 12u$(medium)"> <p>Perquè no té ni el temps, mi la capacitat de mantenir els afores de la seva casa, arriba el moment d’una ajuda puntual per aconseguir que la seva casa sigui cada dia més bonica.</p> </div> <div class="4u$ 12u$(medium)"> <p>La talla de la bardissa, de la gespa, la recollida de les fulles…. Retrobi el plaer de tenir uns afores bonics sense esforç. Vinc amb les meves eines, m’enduc les deixalles, i vostè, sempre amb l’esperit tranquil.</p> </div> </div> </div> </div> <a href="#two" class="goto-next scrolly">Next</a> </section> <!-- Two --> <section id="two" class="spotlight style2 right"> <span class="image fit main"><img src="images/pic03.jpg" alt=""></span> <div class="content"> <header> <h3>Menester d’una mà experta en jardinaria ?</h3> <p>Poso les meves competències al seu servei.</p> </header> <p>Fort d’una experiència de 9 anys com a responsable del conreu dels hibernacles del Soler, li aportaré els meus coneixements dins els dominis de la plantació i del manteniment de plantes i flors del seu jardí.</p> <p>A més del mantemiment, l’aconsellaré amb cura per a arranjar de la manera més adequada del seu jardí i l’ajudaré a triar les plantes més adaptades a la seva terra. </p> <!--<ul class="actions">
+						<li><a href="#" class="button">En savoir plus</a></li>
+					</ul>--> </div> <a href="#three" class="goto-next scrolly">Next</a> </section> <!-- Three --> <section id="three" class="spotlight style3 left"> <span class="image fit main bottom"><img src="images/pic04.jpg" alt=""></span> <div class="content"> <header> <h2>Cap menester d’eines,</h2> <p>Em cuido de tot !</p> </header> <p>Li dóna l’ajuda puntual, pero de qualitat. Vinc amb material professional i enduré totes les deixalles. Que aprofiti d’um jardí net i ben arreglat quan hagi passat.</p> <!--<ul class="actions">
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul>--> </div> <a href="#four" class="goto-next scrolly">Next</a> </section> <!-- Four --> <section id="four" class="wrapper style1 special fade-up"> <div class="container"> <header class="major"> <h2>Descobriu els diferents serveis que puc oferir</h2> <p>No deixi de contactar-me per a obtenir més informacions o fer un pressupost.</p> </header> <div class="box alt"> <div class="row uniform"> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff04.png" alt=""></span> <h3>Talla de gespa</h3> <p>Puc intervenir regularment per a mantenir la seva gespa</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff03.png" alt=""></span> <h3>Talla de bardissess</h3> <p>Que em confiï la talla de la seva bardissa si aquesta aconsegueix agafar una dimensió inadequada</p> </section> <section class="4u$ 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff02.png" alt=""></span> <h3>Esbardissament i fulles</h3> <p>Per la tardor, el seu jardí en vesteix de fulles o una part del seu jardí necessita una neteja</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff07.png" alt=""></span> <h3>Regatge</h3> <p>L’ajudo a regar, o més simplement, l’aconsello en quantitat d’aigua en què el seu jardí té menester.</p> </section> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff05.png" alt=""></span> <h3>Plantació</h3> <p>L’ajudo a decorar els seus afores, en proposar-li plantes i flors en funció dels seus manteniments</p> </section> <section class="4u$ 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff06.png" alt=""></span> <h3>Flors i manteniment</h3> <p>Les flors i arbustes necessiten en manteniment particular, l’ajudo a fer-los créixer i a lluitar contre les malalties.</p> </section> </div> </div> <footer class="major"> <ul class="actions"> <li><a href="contact-ca.html" class="button">Contactar-me</a></li> </ul> </footer> </div> </section> <!-- Five --> <section id="newsletter" class="wrapper style2 special fade"> <div class="container"> <header> <h2>Rebeu consells en jardinaries</h2> <p>En abonar-vos a la newsletter, rebeu regularment consells sobre les taques a realitzar dins el seu jardí, així com l’evolució de les ofertes « ajuda puntual »</p> </header> <form id="news_form" action="#" class="container 50%"> <div class="row uniform 50%" id="news_body"> <div class="7u 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="La meva adreça mail"></div> <div class="5u$ 12u$(xsmall)"><input type="ajaxsubmit" id="submit" value="M’abono !" class="fit special"></div> </div> <div class="row uniform 50%" id="news_results"> </div> </form> </div> </section> <!-- Footer --> <footer id="footer"> <ul class="icons"> <li><a href="contact-ca.html" class="icon alt fa-envelope"><span class="label">Email</span></a></li> <li><a href="https://twitter.com/uncoupdepousse" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> <li><a href="https://www.facebook.com/uncoupdepousse" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li> <li><a href="https://plus.google.com/114787745404768848835" class="icon alt fa-google-plus"><span class="label">Google plus</span></a></li> </ul> <ul class="copyright"> <li>&copy; UnCoupDePouse all rights reserved.</li> <li>Design by VHA</li> <li>Powered by <a href="http://html5up.net">HTML5 UP</a></li> </ul> <ul class="copyright"> <li>Un Coup de Pousse déclaration ministère de l'économie SAP/812935856</li> <li>SIREN : 812 935 856 R.C.S. Perpignan</li> </ul> <ul class="copyright"> <li>T.V.A. non applicable, article 293B du CGI</li> <li><a href="cgv.html">CGV</a></li> </ul> </footer>  

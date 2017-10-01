@@ -1,0 +1,68 @@
+<!DOCTYPE HTML><!--
+	Landed by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> <html> <head> <title>Gardener Perpignan 66 - Un Coup De Pousse</title> <meta http-equiv="content-type" content="text/html; charset=utf-8"> <meta name="description" content="Are you looking for a gardener near Perpignan ? Call Un Coup de Pousse !"> <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]--> <script src="js/scripts.js"></script> <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png"> <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png"> <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png"> <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png"> <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png"> <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png"> <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png"> <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png"> <link rel="icon" href="favicon.ico"> <link rel="alternate" hreflang="ca" href="index-ca.html"> <link rel="alternate" hreflang="fr" href="index.html"> <noscript><link rel="stylesheet" href="css/skel.css" /> <link rel="stylesheet" href="css/style.css" /> <link rel="stylesheet" href="css/style-xlarge.css" /></noscript> <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]--> <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]--> <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-60172877-1', 'auto');
+			ga('send', 'pageview');</script> <!-- Start jQuery code --> <script type="text/javascript">$(document).ready(function() {
+		    $("#submit").click(function() { 
+		        var proceed = true;
+		        //simple validation at client's end
+		        //loop through each field and we simply change border color to red for invalid fields       
+		        $("#news_form input[required=true], #news_form textarea[required=true]").each(function(){
+		            $(this).css('border-color',''); 
+		            if(!$.trim($(this).val())){ //if this field is empty 
+		                $(this).css('border-color','red'); //change border color to red   
+		                proceed = false; //set do not proceed flag
+		            }
+		            //check invalid email
+		            var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+		            if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
+		                $(this).css('border-color','red'); //change border color to red   
+		                proceed = false; //set do not proceed flag              
+		            }
+		        });
+		       
+		        if(proceed) //everything looks good! proceed...
+		        {
+		            //get input field values data to be sent to server
+		            var post_data = {
+		                'email' : $('input[name=email]').val()
+		            };
+		            
+		            //Ajax post data to server
+		            $.post('subscribe.php', post_data, function(response){  
+		            	var output = '';
+		                if(response.type == 'error'){ //load json data from server and output message     
+		                    output = '<div class="error">'+response.text+'</div>';
+		                }else{
+		                    output = '<div class="success">'+response.text+'</div>';
+		                    //reset values in all input fields
+		                    $("#news_form  input[required], #news_form textarea[required]").val(''); 
+		                    $("#news_form #news_body").slideUp(); //hide form after success
+		                }
+		                $("#news_form #news_results").hide().html(output).slideDown();
+		            }, 'json')
+		            .fail(function() {
+						alert( "error" );
+					});
+		        }
+		    });
+		    
+		    //reset previously set border colors and hide all message on .keyup()
+		    $("#news_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
+		        $(this).css('border-color',''); 
+		        $("#news_result").slideUp();
+		    });
+		});</script>  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle = window.adsbygoogle || []).push({
+	google_ad_client: "ca-pub-1476264766102370",
+	enable_page_level_ads: true
+	});</script> <body class="landing"> <!-- Header --> <header id="header"> <h1 id="logo"><a href="index.html">Un Coup De Pousse</a></h1> <nav id="nav"> <ul> <li><a href="index-en.html">Accueil</a></li> <li><a href="#newsletter">Newsletter</a></li> <li><a href="sap.html">50% déductible !</a></li> <li><a href="contact.html" class="button special">Me contacter</a></li> </ul> </nav> </header> <!-- Banner --> <section id="banner"> <div class="content"> <header> <h2>Is your garden in need of maintenance?</h2> <p><strong>Do you need a helping hand?</strong><br> Call me for your gardening needs in Perpignan and the surrounding area.<br> For more information contact Romain on 06 30 14 93 23.</p> <a href="index-ca.html"><i class="flag flag-catalonia"></i></a> <a href="index.html"><i class="flag flag-fr"></i></a> <a href="index-en.html"><i class="flag flag-gb"></i></a> </header> <span class="image"><img src="images/pic01.jpg" alt=""></span> <div style="text-align:center; padding-top:30px"> <img src="images/sap.png" alt=""><br> <!-- Facebook Like Badge START --> <iframe src="http://www.facebook.com/plugins/like.php?href=https://www.facebook.com/uncoupdepousse&layout=box_count&show_faces=true&width=65&action=like&font=arial&colorscheme=light&height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:65px; height:65px; margin-top:3px" allowtransparency="true"> </iframe> <!-- Facebook Like Badge END --> </div> </div> <a href="#one" class="goto-next scrolly">Next</a> </section> <!-- One --> <section id="one" class="spotlight style1 bottom"> <span class="image fit main"><img src="images/pic02.jpg" alt=""></span> <div class="content"> <div class="container"> <div class="row"> <div class="4u 12u$(medium)"> <header> <h2>Un Coup De Pousse</h2> <p>Maintenance of your garden in the area surrounding Perpignan</p> </header> </div> <div class="4u 12u$(medium)"> <p>Sometimes you may not have the time or energy to upkeep the garden around your home, <strong>"Un coup de pousse"</strong>Strong> (A helping hand) will be there for you to complete these tasks which will add beauty to the exterior of your home.</p> </div> <div class="4u$ 12u$(medium)"> <p>Cut/trim the hedges, move the lawn, collect the leaves ..... Find the pleasure of a well maintained garden without the effort. I will come to you home bringing my own professional equipement, taking the gardening rubbish with me, leaving you with peace of mind.</p> </div> </div> </div> </div> <a href="#two" class="goto-next scrolly">Next</a> </section> <!-- Two --> <section id="two" class="spotlight style2 right"> <span class="image fit main"><img src="images/pic03.jpg" alt=""></span> <div class="content"> <header> <h3>Do you need someone with green fingers ?</h3> <p>I will put my knowledge to help you.</p> </header> <p>After nine years as the head gardener in charge of planting/ cultivation in the greenhouses of Soler I will put in place my knowledge in the planting and upkeep of your gardens trees, shrubs, plants and flowers around the exterior of your home.</p> <p>In addition to the maintenance and upkeep of your garden, I can give you expert advise on the soil type of your garden and the best plants to improve this feature of your home.</p> <!--<ul class="actions">
+						<li><a href="#" class="button">En savoir plus</a></li>
+					</ul>--> </div> <a href="#three" class="goto-next scrolly">Next</a> </section> <!-- Three --> <section id="three" class="spotlight style3 left"> <span class="image fit main bottom"><img src="images/pic04.jpg" alt=""></span> <div class="content"> <header> <h2>No need for the multitude of gardening equipement,</h2> <p>I will deal with everything!</p> </header> <p>I will give you <strong>"Un coup de pousse"</strong> (A helping hand) but rest assured with quality guarenteed. I will arrive with professional equipement and leave with the gardening rubbish from its upkeep/maintenance. Immediately profit from your well keeped garden after I finished.</p> <!--<ul class="actions">
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul>--> </div> <a href="#four" class="goto-next scrolly">Next</a> </section> <!-- Four --> <section id="four" class="wrapper style1 special fade-up"> <div class="container"> <header class="major"> <h2>Découvrez mes différents services</h2> <p>N'hésitez pas à me contacter pour obtenir plus d'informations ou établir un devis !</p> </header> <div class="box alt"> <div class="row uniform"> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff04.png" alt=""></span> <h3>Tonte de gazon</h3> <p>Je peux intervenir régulièrement pour entretenir votre gazon.</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff03.png" alt=""></span> <h3>Taille de haies</h3> <p>Une haie devient un peu trop volumineuse chez vous ou chez vos voisins, confiez-moi sa taille.</p> </section> <section class="4u$ 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff02.png" alt=""></span> <h3>Débroussaillage et Feuilles</h3> <p>L'automne à tendance à recouvrir votre jardin de feuilles ou une partie de votre jardin nécessite un bon nettoyage.</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff07.png" alt=""></span> <h3>Arrosage</h3> <p>Je vous aide à arroser ou tout simplement vous conseiller sur les besoins en eau de votre jardin.</p> </section> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff05.png" alt=""></span> <h3>Plantation</h3> <p>Je vous aide à décorer votre extérieur en vous proposant des plantes et fleurs qui nécessitent plus ou moins d'entretien.</p> </section> <section class="4u$ 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff06.png" alt=""></span> <h3>Fleurs et entretien</h3> <p>Les fleurs et arbustes nécessitent un entretien particulier, je vous aide à les faire prospérer et lutter contre les maladies.</p> </section> </div> </div> <footer class="major"> <ul class="actions"> <li><a href="contact.html" class="button">Me contacter</a></li> </ul> </footer> </div> </section> <!-- Five --> <section id="newsletter" class="wrapper style2 special fade"> <div class="container"> <header> <h2>Recevez des conseils jardinages !</h2> <p>En vous abonnant à la newsletter, recevez régulièrement des conseils sur les tâches à réaliser dans votre jardin ainsi que l'évolution des offres d'Un Coup De Pousse.</p> </header> <form id="news_form" action="#" class="container 50%"> <div class="row uniform 50%" id="news_body"> <div class="7u 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Mon adresse email"></div> <div class="5u$ 12u$(xsmall)"><input type="ajaxsubmit" id="submit" value="Je m'abonne !" class="fit special"></div> </div> <div class="row uniform 50%" id="news_results"> </div> </form> </div> </section> <!-- Footer --> <footer id="footer"> <ul class="icons"> <li><a href="contact.html" class="icon alt fa-envelope"><span class="label">Email</span></a></li> <li><a href="https://twitter.com/uncoupdepousse" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> <li><a href="https://www.facebook.com/uncoupdepousse" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li> <li><a href="https://plus.google.com/114787745404768848835" class="icon alt fa-google-plus"><span class="label">Google plus</span></a></li> </ul> <ul class="copyright"> <li>&copy; UnCoupDePouse all rights reserved.</li> <li>Design by VHA</li> <li>Powered by <a href="http://html5up.net">HTML5 UP</a></li> </ul> <ul class="copyright"> <li>Un Coup de Pousse déclaration ministère de l'économie SAP/812935856</li> <li>SIREN : 812 935 856 R.C.S. Perpignan</li> </ul> <ul class="copyright"> <li>T.V.A. non applicable, article 293B du CGI</li> <li><a href="cgv.html">CGV</a></li> </ul> </footer>  
