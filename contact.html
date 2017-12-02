@@ -8,62 +8,7 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 			ga('create', 'UA-60172877-1', 'auto');
-			ga('send', 'pageview');</script> <!-- Start jQuery code --> <script type="text/javascript">$(document).ready(function() {
-		    $("#submit").click(function() { 
-		        var proceed = true;
-		        //simple validation at client's end
-		        //loop through each field and we simply change border color to red for invalid fields       
-		        $("#contact_form input[required=true], #contact_form textarea[required=true]").each(function(){
-		            $(this).css('border-color',''); 
-		            if(!$.trim($(this).val())){ //if this field is empty 
-		                $(this).css('border-color','red'); //change border color to red   
-		                proceed = false; //set do not proceed flag
-		            }
-		            //check invalid email
-		            var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
-		            if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
-		                $(this).css('border-color','red'); //change border color to red   
-		                proceed = false; //set do not proceed flag              
-		            }
-		        });
-		       
-		        if(proceed) //everything looks good! proceed...
-		        {
-		            //get input field values data to be sent to server
-		            var post_data = {
-		                'name'     		: $('input[name=name]').val(),
-		                'email'    		: $('input[name=email]').val(),
-		                'copyme'  		: $('input[name=copyme]').val(),
-		                'phone'  		: $('input[name=phone]').val(),
-		                'subject'  		: $('input[name=subject]').val(),
-		                'msg'           : $('textarea[name=message]').val()
-		            };
-		            
-		            //Ajax post data to server
-		            $.post('http://vhapps-vhapps.193b.starter-ca-central-1.openshiftapps.com/contact_me.php', post_data, function(response){  
-		            	var output = '';
-		                if(response.type == 'error'){ //load json data from server and output message     
-		                    output = '<div class="error">'+response.text+'</div>';
-		                }else{
-		                    output = '<div class="success">'+response.text+'</div>';
-		                    //reset values in all input fields
-		                    $("#contact_form  input[required], #contact_form textarea[required]").val(''); 
-		                    $("#contact_form #contact_body").slideUp(); //hide form after success
-		                }
-		                $("#contact_form #contact_results").hide().html(output).slideDown();
-		            }, 'json')
-		            .fail(function() {
-						alert( "error" );
-					});
-		        }
-		    });
-		    
-		    //reset previously set border colors and hide all message on .keyup()
-		    $("#contact_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
-		        $(this).css('border-color',''); 
-		        $("#contact_result").slideUp();
-		    });
-		});</script>  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle = window.adsbygoogle || []).push({
+			ga('send', 'pageview');</script>  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle = window.adsbygoogle || []).push({
 	google_ad_client: "ca-pub-1476264766102370",
 	enable_page_level_ads: true
-	});</script> <body> <!-- Header --> <header id="header"> <h1 id="logo"><a href="index.html">Un Coup De Pousse</a></h1> <nav id="nav"> <ul> <li><a href="index.html">Accueil</a></li> <li><a href="index.html#newsletter">Newsletter</a></li> <li><a href="sap.html">50% déductible !</a></li> <li><a href="contact.html" class="button special">Me contacter</a></li> </ul> </nav> </header> <!-- Main --> <div id="main" class="wrapper style1"> <div class="container"> <header class="major"> <h1>Vous souhaitez plus d'information ? Un devis ? Prendre rendez-vous ?</h1> <p><strong>Contactez Romain !</strong></p> <h2>06 30 14 93 23</h2> </header> <!-- Form --> <section> <h3>Ou envoyez moi un email via ce formulaire : contact@uncoupdepousse.fr</h3> <form id="contact_form" action="#"> <div class="row uniform 50%" id="contact_body"> <div class="6u 12u$(xsmall)"> <input type="text" name="name" id="name" value="" placeholder="Nom" required> </div> <div class="6u$ 12u$(xsmall)"> <input type="text" name="phone" id="phone" value="" placeholder="Telephone"> </div> <div class="12u$ 12u$(xsmall)"> <input type="email" name="email" id="email" value="" placeholder="Email" required> </div> <div class="6u 12u$(medium)"> <input type="checkbox" id="copyme" name="copyme"> <label for="copyme">M'envoyer une copie du message</label> </div> <div class="12u$ 12u$(xsmall)"> <input type="text" name="subject" id="subject" value="" placeholder="Sujet" required> </div> <div class="12u$"> <textarea name="message" id="message" placeholder="Entrer votre message ici" rows="6" required></textarea> </div> <div class="12u$"> <ul class="actions"> <li><input id="submit" type="ajaxsubmit" value="Envoyer le message" class="special"></li> </ul> </div> </div> <div class="row uniform 50%" id="contact_results"> </div> </form> </section> </div> </div> <!-- Footer --> <footer id="footer"> <ul class="icons"> <li><a href="contact.html" class="icon alt fa-envelope"><span class="label">Email</span></a></li> <li><a href="https://twitter.com/uncoupdepousse" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> <li><a href="https://www.facebook.com/uncoupdepousse" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li> <li><a href="https://plus.google.com/114787745404768848835" class="icon alt fa-google-plus"><span class="label">Google plus</span></a></li> </ul> <ul class="copyright"> <li>&copy; UnCoupDePouse all rights reserved.</li> <li>Design by VHA</li> <li>Powered by <a href="http://html5up.net">HTML5 UP</a></li> </ul> <ul class="copyright"> <li>Un Coup de Pousse déclaration ministère de l'économie SAP/812935856</li> <li>SIREN : 812 935 856 R.C.S. Perpignan</li> </ul> <ul class="copyright"> <li>T.V.A. non applicable, article 293B du CGI</li> <li><a href="cgv.html">CGV</a></li> </ul> </footer>  
+	});</script> <body> <!-- Header --> <header id="header"> <h1 id="logo"><a href="index.html">Un Coup De Pousse</a></h1> <nav id="nav"> <ul> <li><a href="index.html">Accueil</a></li> <li><a href="index.html#newsletter">Newsletter</a></li> <li><a href="sap.html">50% déductible !</a></li> <li><a href="contact.html" class="button special">Me contacter</a></li> </ul> </nav> </header> <!-- Main --> <div id="main" class="wrapper style1"> <div class="container"> <header class="major"> <h1>Vous souhaitez plus d'information ? Un devis ? Prendre rendez-vous ?</h1> <p><strong>Contactez Romain !</strong></p> <h2>06 30 14 93 23</h2> </header> <!-- Form --> <section style="text-align: center"> <a href="mailto:contact@uncoupdepousse.fr">Ou envoyer moi un email :<br>contact@uncoupdepousse.fr</a> </section> </div> </div> <!-- Footer --> <footer id="footer"> <ul class="icons"> <li><a href="contact.html" class="icon alt fa-envelope"><span class="label">Email</span></a></li> <li><a href="https://twitter.com/uncoupdepousse" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> <li><a href="https://www.facebook.com/uncoupdepousse" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li> <li><a href="https://plus.google.com/114787745404768848835" class="icon alt fa-google-plus"><span class="label">Google plus</span></a></li> </ul> <ul class="copyright"> <li>&copy; UnCoupDePouse all rights reserved.</li> <li>Design by VHA</li> <li>Powered by <a href="http://html5up.net">HTML5 UP</a></li> </ul> <ul class="copyright"> <li>Un Coup de Pousse déclaration ministère de l'économie SAP/812935856</li> <li>SIREN : 812 935 856 R.C.S. Perpignan</li> </ul> <ul class="copyright"> <li>T.V.A. non applicable, article 293B du CGI</li> <li><a href="cgv.html">CGV</a></li> </ul> </footer>  
