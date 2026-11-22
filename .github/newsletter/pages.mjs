@@ -1,13 +1,19 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import os from 'node:os';
+import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
 
 export const site = 'https://www.uncoupdepousse.fr';
 const source = 'https://gestion.uncoupdepousse.fr/newsletter-publique/';
 const keyFormat = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
 const escape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const formatted = new Intl.DateTimeFormat('fr-FR',{dateStyle:'long',timeZone:'Europe/Paris'});
+const run = promisify(execFile);
+const maxPdfBytes = 20 * 1024 * 1024;
+const pdfUrl = edition => source + edition.key + '.pdf';
 
 export async function readPublicEditions(send = fetch) {
   const editions = [], keys = new Set();
@@ -20,7 +26,7 @@ export async function readPublicEditions(send = fetch) {
     const page = await response.json();
     if(page.format!==1 || !Array.isArray(page.editions)) throw Error('Format du flux inconnu.');
     for(const e of page.editions) {
-      if(!keyFormat.test(e.key)||keys.has(e.key)||typeof e.title!=='string'||!e.title||typeof e.body!=='string'||
+      if(typeof e.key!=='string'||!keyFormat.test(e.key)||keys.has(e.key)||typeof e.title!=='string'||!e.title||typeof e.body!=='string'||
           !Number.isSafeInteger(e.date)||!Number.isFinite(new Date(e.date).getTime())||typeof e.pdf!=='boolean') throw Error('Édition invalide.');
       keys.add(e.key);
       editions.push({key:e.key,date:e.date,title:e.title,body:e.body,pdf:e.pdf});
@@ -29,6 +35,46 @@ export async function readPublicEditions(send = fetch) {
     cursor=page.next;
   } while(cursor);
   return editions.sort((a,b)=>b.date-a.date || a.key.localeCompare(b.key,'en'));
+}
+
+async function readPdf(edition, send) {
+  const response = await send(pdfUrl(edition), { redirect: 'error', signal: AbortSignal.timeout(20000) });
+  if (!response.ok || !response.body || !/^application\/pdf\b/i.test(response.headers.get('content-type') ?? '')) {
+    await response.body?.cancel();
+    throw Error('PDF indisponible');
+  }
+
+  const chunks = [];
+  let length = 0;
+  for await (const chunk of response.body) {
+    length += chunk.length;
+    if (length > maxPdfBytes) throw Error('PDF trop volumineux');
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks, length);
+}
+
+export async function addPdfCovers(editions, send = fetch) {
+  for (const edition of editions) {
+    if (!edition.pdf) continue;
+    let directory;
+    try {
+      const pdf = await readPdf(edition, send);
+      directory = await fs.mkdtemp(path.join(os.tmpdir(), 'ucdp-newsletter-'));
+      const filename = path.join(directory, 'edition.pdf');
+      await fs.writeFile(filename, pdf);
+      const { stdout } = await run('pdftoppm', [
+        '-f', '1', '-l', '1', '-singlefile', '-scale-to', '720',
+        '-jpeg', '-jpegopt', 'quality=82', filename
+      ], { encoding: 'buffer', timeout: 15000, maxBuffer: 1024 * 1024 });
+      if (stdout[0] !== 0xff || stdout[1] !== 0xd8) throw Error('Vignette invalide');
+      edition.cover = stdout.toString('base64');
+    } catch {
+      console.warn('Vignette indisponible pour l’édition ' + edition.key + '.');
+    } finally {
+      if (directory) await fs.rm(directory, { recursive: true, force: true });
+    }
+  }
 }
 
 const date = e => '<time datetime="'+new Date(e.date).toISOString()+'">'+formatted.format(e.date)+'</time>';
@@ -40,7 +86,42 @@ const newsletterCss = `
   .newsletter-archives li { padding: .65rem 0; }
   .newsletter-archives li + li { border-top: 1px solid var(--line); }
   .newsletter-archives time { display: block; }
+  .newsletter-feature { display: grid; gap: .85rem; max-width: 52rem; }
+  .newsletter-feature h2 { margin: .45rem 0 0; font-size: clamp(1.35rem, 3vw, 1.95rem); }
+  .newsletter-feature > .newsletter-text { margin: 0; }
+  .newsletter-date { margin: 0; font-size: .95rem; }
+  .newsletter-pdf { justify-self: start; }
+  .newsletter-preview {
+    display: inline-grid; grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: center; gap: .75rem; font-weight: 650;
+  }
+  .newsletter-preview img {
+    display: block; inline-size: 100%; block-size: auto; aspect-ratio: 3 / 4;
+    object-fit: contain; box-shadow: 0 2px 8px rgb(32 55 42 / .12);
+    border: 1px solid var(--line, #cbd3c6); border-radius: .35rem; background: #fff;
+  }
+  @media (max-width: 767px) {
+    .newsletter-heading { gap: .65rem; margin-bottom: 1.25rem; }
+    .newsletter-heading h1 { max-width: none; font-size: clamp(1.9rem, 8.2vw, 2.45rem); }
+  }
+  @media (min-width: 42rem) {
+    .newsletter-feature-with-cover { grid-template-columns: minmax(0, 1fr) 9rem; }
+    .newsletter-feature-with-cover > .newsletter-preview {
+      grid-column: 2; grid-row: 1 / 3; grid-template-columns: 1fr;
+      inline-size: 100%; justify-items: start; align-self: start;
+    }
+    .newsletter-feature-with-cover > .newsletter-text { grid-column: 1; grid-row: 2; }
+  }
 `;
+
+function pdfLink(edition) {
+  if (!edition.pdf) return '';
+  const cover = edition.cover
+    ? '<img src="/newsletter/' + edition.key + '/cover.jpg" width="108" height="144" alt="" loading="lazy" decoding="async">'
+    : '';
+  return '<a class="' + (cover ? 'newsletter-preview' : 'newsletter-pdf') + '" href="' + pdfUrl(edition) + '">' +
+    cover + '<span>Lire le PDF</span></a>';
+}
 
 function doc(template, title, description, route, content, indexable = true) {
   const pageTitle = '<title>' + escape(title) + ' · Un Coup de Pousse</title>';
@@ -78,7 +159,10 @@ export async function writePages(dir,editions) {
   const [latest, ...archives] = editions;
   const editionLink = e => '/newsletter/' + e.key + '/';
   const featured = latest
-    ? '<section class="card prose feature" aria-label="Dernière édition"><p>Dernière édition · ' + date(latest) + '</p><h2><a href="' + editionLink(latest) + '">' + escape(latest.title) + '</a></h2><p class="newsletter-text">' + escape(latest.body) + '</p></section>'
+    ? '<section class="card feature newsletter-feature' + (latest.cover ? ' newsletter-feature-with-cover' : '') +
+      '" aria-label="Dernière édition"><div><p class="newsletter-date">Dernière édition · ' + date(latest) +
+      '</p><h2><a href="' + editionLink(latest) + '">' + escape(latest.title) + '</a></h2></div>' +
+      pdfLink(latest) + '<p class="newsletter-text">' + escape(latest.body) + '</p></section>'
     : '<section class="card prose"><h2>Dernières éditions</h2><p>Aucune édition publique pour le moment.</p></section>';
   const archive = archives.length
     ? '<section class="card prose newsletter-archives"><h2>Archives</h2><ol>' + archives.map(e => '<li>' + date(e) + ' <a href="' + editionLink(e) + '">' + escape(e.title) + '</a></li>').join('') + '</ol></section>'
@@ -86,14 +170,15 @@ export async function writePages(dir,editions) {
   const clientLink = template ? '/espace-client.html' : 'https://espace-client.uncoupdepousse.fr/espace-client/';
   const linkToClient = '<p>Vous êtes déjà client ? Retrouvez vos éditions dans votre <a href="' + clientLink + '">espace client</a>.</p>';
   const intro = 'Les conseils de saison de Romain, jardinier à Perpignan et aux alentours.';
-  const archiveContent = '<div class="page-heading"><h1>Newsletter jardinage</h1><p class="lead">' + intro + '</p></div><div class="newsletter-content">' + featured + archive + linkToClient + '</div>';
+  const archiveContent = '<div class="page-heading newsletter-heading"><h1>Newsletter jardinage</h1><p class="lead">' + intro + '</p></div><div class="newsletter-content">' + featured + archive + linkToClient + '</div>';
   await fs.writeFile(index, doc(template, 'Newsletter jardinage', intro, '/newsletter/', archiveContent, Boolean(latest)));
   await fs.writeFile(path.join(dir, 'style.css'), template ? newsletterCss : css + newsletterCss);
 
   for (const e of editions) {
     const target = path.join(dir, e.key);
     await fs.mkdir(target);
-    const pdf = e.pdf ? '<p><a href="' + source + e.key + '.pdf">Lire l’édition en PDF</a></p>' : '';
+    if (e.cover) await fs.writeFile(path.join(target, 'cover.jpg'), Buffer.from(e.cover, 'base64'));
+    const pdf = e.pdf ? '<p>' + pdfLink(e) + '</p>' : '';
     const article = '<article class="prose"><div class="page-heading">' + date(e) + '<h1>' + escape(e.title) + '</h1></div><p class="newsletter-text">' + escape(e.body) + '</p>' + pdf + '</article><p><a href="/newsletter/">Toutes les éditions</a></p>';
     await fs.writeFile(path.join(target, 'index.html'), doc(template, e.title, e.body, editionLink(e), article));
   }
@@ -129,6 +214,7 @@ if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[
   const [mode,out]=process.argv.slice(2);
   if(mode==='collect') {
     const editions=await readPublicEditions();
+    await addPdfCovers(editions);
     await fs.writeFile(out,JSON.stringify(editions));
     let published='';
     if(process.env.GITHUB_EVENT_NAME==='schedule'){

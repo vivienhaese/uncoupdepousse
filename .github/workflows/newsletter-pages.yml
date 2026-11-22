@@ -28,6 +28,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Préparer la conversion des PDF
+        shell: bash
+        run: |
+          if ! command -v pdftoppm >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
       - id: feed
         name: Lire les éditions publiques
         run: node .github/newsletter/pages.mjs collect "$RUNNER_TEMP/editions.json"

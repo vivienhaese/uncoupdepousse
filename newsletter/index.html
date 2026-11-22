@@ -10,6 +10,7 @@
   <link rel="canonical" href="https://www.uncoupdepousse.fr/newsletter/">
   <link rel="icon" type="image/webp" href="/assets/logo-un-coup-de-pousse.webp">
   <link rel="stylesheet" href="/site.css">
+  <script defer src="/header-menu.js"></script>
 </head>
 <body>
   <a class="skip" href="#contenu">Aller au contenu</a>
@@ -22,13 +23,23 @@
         </a>
         <a class="header-sap" href="/sap.html" aria-label="Services à la personne"><img src="/assets/logo-services-a-la-personne.png" alt="" width="97" height="81"></a>
       </div>
-      <nav aria-label="Menu principal">
+      <div class="header-mobile-actions" hidden>
+        <a class="header-quick-call" href="tel:+33630149323" aria-label="Appeler Romain">
+          <span class="header-call-icon" aria-hidden="true">☏</span>
+          <span class="header-call-label">Appeler</span>
+        </a>
+        <button class="header-menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+          <span class="header-menu-icon" aria-hidden="true"></span>
+          Menu
+        </button>
+      </div>
+      <nav class="header-nav" id="site-navigation" aria-label="Menu principal">
         <ul>
           <li><a href="/">Accueil</a></li>
           <li><a href="/newsletter/" aria-current="page">Newsletter</a></li>
           <li><a href="/sap.html">50 % déductible !</a></li>
           <li><a href="/espace-client.html">Espace client</a></li>
-          <li><a class="button" href="/contact.html">Me contacter</a></li>
+          <li class="header-contact-item"><a class="button" href="/contact.html">Me contacter</a></li>
           <li class="header-google-reviews">
             <a href="https://www.google.com/maps/place/Un+Coup+de+Pousse+-+Jardinier+-/@45.2989329,4.5786511,6z/data=!4m8!3m7!1s0x12b06fd1e78349ef:0xf36d30f7b50fc64f!8m2!3d45.2989329!4d4.5786511!9m1!1b1!16s%2Fg%2F11c3pwf2xs?entry=ttu&amp;g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D">
               <span><span class="google-review-star" aria-hidden="true">★</span> <strong>4,9/5 · 78 avis Google</strong></span>

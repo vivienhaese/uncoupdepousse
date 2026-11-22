@@ -32,6 +32,7 @@ p { color: var(--body); }
 .skip:focus { transform: none; }
 .site-header { background: var(--white); border-bottom: 1px solid var(--line); }
 .header-inner { display: flex; gap: .75rem 1rem; align-items: center; justify-content: space-between; min-height: 5rem; }
+.header-mobile-actions { display: none; }
 .header-identity, .header-languages { display: flex; align-items: center; gap: .5rem; flex: none; }
 .header-sap { padding: .2rem; }
 .header-sap img { width: 2.6rem; height: auto; }
@@ -126,14 +127,76 @@ nav a:not(.button):hover, nav a:not(.button)[aria-current="page"] { color: var(-
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 767px) {
+  .header-inner { gap: .5rem; padding-block: .6rem; }
+  .header-identity { gap: .35rem; }
+  .header-identity .brand { gap: .5rem; font-size: 1.02rem; }
+  .header-sap { display: grid; place-items: center; min-width: 2.75rem; min-height: 2.75rem; }
+  .header-sap img { width: 2.2rem; }
+
+  .header-mobile-actions:not([hidden]) { display: flex; align-items: center; gap: .4rem; margin-inline-start: auto; }
+  .header-menu-toggle, .header-quick-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: .35rem .65rem;
+    border: 1px solid var(--line);
+    border-radius: .65rem;
+    background: var(--white);
+    color: var(--green-deep);
+    font: inherit;
+    font-weight: 680;
+    text-decoration: none;
+  }
+  .header-menu-toggle { cursor: pointer; }
+  .header-menu-toggle:hover, .header-menu-toggle[aria-expanded="true"] { background: var(--sage); }
+  .header-quick-call { display: none; background: var(--green); color: var(--white); }
+  .header-quick-call:hover { background: var(--green-deep); }
+  .header-call-icon { font-size: 1.12rem; line-height: 1; }
+  .header-call-label { display: none; }
+  .header-menu-icon { position: relative; flex: none; width: 1rem; height: .75rem; }
+  .header-menu-icon::before, .header-menu-icon::after {
+    position: absolute;
+    inset-inline: 0;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    content: "";
+  }
+  .header-menu-icon::before { top: 0; box-shadow: 0 .31rem currentColor; }
+  .header-menu-icon::after { bottom: 0; }
+  .header-menu-toggle[aria-expanded="true"] .header-menu-icon::before {
+    top: calc(50% - 1px);
+    box-shadow: none;
+    transform: rotate(45deg);
+  }
+  .header-menu-toggle[aria-expanded="true"] .header-menu-icon::after {
+    bottom: calc(50% - 1px);
+    transform: rotate(-45deg);
+  }
+
+  .header-inner[data-menu-open="false"] > .header-nav { display: none; }
+  .header-inner > .header-nav { padding-top: .55rem; border-top: 1px solid var(--line); }
+  .header-inner > .header-nav > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem .55rem; }
+  .header-nav > ul > li > a { width: 100%; min-height: 2.75rem; padding: .35rem .55rem; font-size: 1rem; }
+  .header-nav > ul > li > a[aria-current="page"]:not(.button) { border-radius: .55rem; background: var(--sage); }
+  .header-nav .header-contact-item, .header-nav .header-google-reviews { grid-column: 1 / -1; }
+  .header-nav .header-languages a { width: 2.75rem; min-height: 2.75rem; }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .header-quick-call { display: inline-flex; }
+}
+
+@media (min-width: 460px) and (max-width: 767px) {
+  .header-call-label { display: inline; }
+}
+
 @media (max-width: 640px) {
   .shell { width: calc(100% - 2rem); }
-  .header-inner { flex-wrap: wrap; gap: .5rem; padding-block: .75rem; }
-  nav ul { gap: .1rem .72rem; }
-  .header-inner > nav > ul { gap: .15rem .65rem; }
-  .header-languages a { width: 2.05rem; }
-  nav a { font-size: .875rem; min-height: 2.5rem; }
-  nav .button { min-height: 2.5rem; padding: .28rem .52rem; }
   .hero, .story, .newsletter-inner, .service-details, .cards { grid-template-columns: 1fr; }
   .water-banner-inner { grid-template-columns: 1fr; }
   .water-address { margin-inline-start: 1rem; min-height: 2rem; }
