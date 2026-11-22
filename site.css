@@ -37,8 +37,9 @@ p { color: var(--body); }
 .header-sap { padding: .2rem; }
 .header-sap img { width: 2.6rem; height: auto; }
 .header-languages { gap: .16rem; }
-.header-inner > nav > ul { justify-content: flex-end; gap: .35rem 1rem; }
-.header-google-reviews a { display: grid; gap: .2rem; align-content: center; min-height: 2.75rem; padding: .3rem .05rem; font-size: .8rem; line-height: 1.25; }
+.header-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .35rem 1rem; }
+.header-nav > ul { justify-content: flex-end; gap: .35rem 1rem; }
+.header-google-reviews a { display: grid; gap: .2rem; align-content: center; min-height: 2.75rem; padding: .3rem .05rem; color: var(--ink); font-size: .8rem; font-weight: 630; line-height: 1.25; text-decoration: none; }
 .header-review-action { color: var(--green-deep); text-decoration: underline; }
 .header-languages a { display: grid; place-items: center; width: 2.35rem; min-height: 2.35rem; border: 1px solid transparent; border-radius: .45rem; }
 .header-languages a[aria-current="page"], .header-languages a:hover { background: var(--sage); border-color: var(--line); }
@@ -117,8 +118,8 @@ nav a:not(.button):hover, nav a:not(.button)[aria-current="page"] { color: var(-
 
 @media (max-width: 1080px) {
   .header-inner { flex-wrap: wrap; gap: .55rem 1rem; padding-block: .65rem; }
-  .header-inner > nav { width: 100%; }
-  .header-inner > nav > ul { justify-content: flex-start; gap: .25rem .85rem; }
+  .header-links { width: 100%; justify-content: flex-start; gap: .25rem .85rem; }
+  .header-nav > ul { justify-content: flex-start; gap: .25rem .85rem; }
 }
 
 @media (max-width: 850px) {
@@ -178,13 +179,16 @@ nav a:not(.button):hover, nav a:not(.button)[aria-current="page"] { color: var(-
     transform: rotate(-45deg);
   }
 
-  .header-inner[data-menu-open="false"] > .header-nav { display: none; }
-  .header-inner > .header-nav { padding-top: .55rem; border-top: 1px solid var(--line); }
-  .header-inner > .header-nav > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem .55rem; }
+  .header-links { display: grid; grid-template-columns: minmax(0, 1fr); gap: .55rem; }
+  .header-google-reviews { order: -1; }
+  .header-google-reviews a { padding: .4rem .55rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--sand); font-size: .9rem; }
+  .header-inner[data-menu-open="false"] .header-nav,
+  .header-inner[data-menu-open="false"] .header-languages { display: none; }
+  .header-nav { padding-top: .55rem; border-top: 1px solid var(--line); }
+  .header-nav > ul { display: grid; grid-template-columns: minmax(0, 1fr); gap: .3rem; }
   .header-nav > ul > li > a { width: 100%; min-height: 2.75rem; padding: .35rem .55rem; font-size: 1rem; }
   .header-nav > ul > li > a[aria-current="page"]:not(.button) { border-radius: .55rem; background: var(--sage); }
-  .header-nav .header-contact-item, .header-nav .header-google-reviews { grid-column: 1 / -1; }
-  .header-nav .header-languages a { width: 2.75rem; min-height: 2.75rem; }
+  .header-languages a { width: 2.75rem; min-height: 2.75rem; }
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
