@@ -1,0 +1,60 @@
+name: Vitrine et newsletters
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+
+permissions: {}
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('ucdp-site-preview-{0}', github.event.pull_request.number) || 'ucdp-site-pages' }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      changed: ${{ steps.feed.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - id: feed
+        name: Lire les éditions publiques
+        run: node .github/newsletter/pages.mjs collect "$RUNNER_TEMP/editions.json"
+      - uses: actions/configure-pages@v5
+        if: steps.feed.outputs.changed == 'true' && github.event_name != 'pull_request'
+      - name: Ajouter la rubrique au site complet
+        if: steps.feed.outputs.changed == 'true'
+        shell: bash
+        run: |
+          mkdir "$RUNNER_TEMP/site-vitrine"
+          git archive HEAD -- . ':!.github' ':!INTEGRATION-NEWSLETTER.md' ':!SEO-MISE-EN-LIGNE.md' | tar -x -C "$RUNNER_TEMP/site-vitrine"
+          node .github/newsletter/pages.mjs build "$RUNNER_TEMP/site-vitrine" "$RUNNER_TEMP/editions.json"
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.feed.outputs.changed == 'true'
+        with:
+          path: ${{ runner.temp }}/site-vitrine
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && needs.build.outputs.changed == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
