@@ -1,41 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-<url>
-  <loc>http://www.uncoupdepousse.fr/</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/index.html</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/sap.html</loc>
-  <lastmod>2015-08-19T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/contact.html</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/index-ca.html</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/index-en.html</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/contact-ca.html</loc>
-  <lastmod>2015-08-18T20:53:15+00:00</lastmod>
-</url>
-<url>
-  <loc>http://www.uncoupdepousse.fr/cgv.html</loc>
-  <lastmod>2015-09-04T20:53:15+00:00</lastmod>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.uncoupdepousse.fr/</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/contact.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/sap.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/cgv.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/index-ca.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/index-en.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/contact-ca.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/taille-de-haies.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/debroussaillage.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/tonte-de-gazon.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/arrosage.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/plantation.html</loc></url>
+  <url><loc>https://www.uncoupdepousse.fr/fleurs-et-entretien.html</loc></url>
 </urlset>

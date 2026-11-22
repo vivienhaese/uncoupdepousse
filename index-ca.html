@@ -1,68 +1,179 @@
-<!DOCTYPE HTML><!--
-	Landed by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
---> <html> <head> <title>jardiner Perpinyà 66 - Un Coup De Pousse</title> <meta http-equiv="content-type" content="text/html; charset=utf-8"> <meta name="description" content="El vostre jardí té menester de ser curat ? Necessita una ajuda puntual ?"> <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]--> <script src="js/scripts.js"></script> <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png"> <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png"> <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png"> <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png"> <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png"> <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png"> <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png"> <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png"> <link rel="icon" href="favicon.ico"> <link rel="alternate" hreflang="en" href="index-en.html"> <link rel="alternate" hreflang="fr" href="index.html"> <noscript><link rel="stylesheet" href="css/skel.css" /> <link rel="stylesheet" href="css/style.css" /> <link rel="stylesheet" href="css/style-xlarge.css" /></noscript> <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]--> <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]--> <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-60172877-1', 'auto');
-			ga('send', 'pageview');</script> <!-- Start jQuery code --> <script type="text/javascript">$(document).ready(function() {
-		    $("#submit").click(function() { 
-		        var proceed = true;
-		        //simple validation at client's end
-		        //loop through each field and we simply change border color to red for invalid fields       
-		        $("#news_form input[required=true], #news_form textarea[required=true]").each(function(){
-		            $(this).css('border-color',''); 
-		            if(!$.trim($(this).val())){ //if this field is empty 
-		                $(this).css('border-color','red'); //change border color to red   
-		                proceed = false; //set do not proceed flag
-		            }
-		            //check invalid email
-		            var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
-		            if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
-		                $(this).css('border-color','red'); //change border color to red   
-		                proceed = false; //set do not proceed flag              
-		            }
-		        });
-		       
-		        if(proceed) //everything looks good! proceed...
-		        {
-		            //get input field values data to be sent to server
-		            var post_data = {
-		                'email' : $('input[name=email]').val()
-		            };
-		            
-		            //Ajax post data to server
-		            $.post('http://vhapps-vhapps.193b.starter-ca-central-1.openshiftapps.com/subscribe.php', post_data, function(response){  
-		            	var output = '';
-		                if(response.type == 'error'){ //load json data from server and output message     
-		                    output = '<div class="error">'+response.text+'</div>';
-		                }else{
-		                    output = '<div class="success">'+response.text+'</div>';
-		                    //reset values in all input fields
-		                    $("#news_form  input[required], #news_form textarea[required]").val(''); 
-		                    $("#news_form #news_body").slideUp(); //hide form after success
-		                }
-		                $("#news_form #news_results").hide().html(output).slideDown();
-		            }, 'json')
-		            .fail(function() {
-						alert( "error" );
-					});
-		        }
-		    });
-		    
-		    //reset previously set border colors and hide all message on .keyup()
-		    $("#news_form  input[required=true], #contact_form textarea[required=true]").keyup(function() { 
-		        $(this).css('border-color',''); 
-		        $("#news_result").slideUp();
-		    });
-		});</script>  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle = window.adsbygoogle || []).push({
-	google_ad_client: "ca-pub-1476264766102370",
-	enable_page_level_ads: true
-	});</script> <body class="landing"> <!-- Header --> <header id="header"> <h1 id="logo"><a href="index.html">Un Coup De Pousse</a></h1> <nav id="nav"> <ul> <li><a href="index-ca.html">Accolliment</a></li> <li><a href="#newsletter">Newsletter</a></li> <li><a href="sap.html">50% deductible !</a></li> <li><a href="contact-ca.html" class="button special">Contactar-me</a></li> </ul> </nav> </header> <!-- Banner --> <section id="banner"> <div class="content"> <header> <h2>El vostre jardí té menester de ser curat ?</h2> <p><strong>Necessita una ajuda puntual ?</strong><br> Crida ‘m per a les seves feines d’exterior al voltant de perpinyà.<br> Per a més informacions, contacti Romain al 06 30 14 93 23.</p> <a href="index-ca.html"><i class="flag flag-catalonia"></i></a> <a href="index.html"><i class="flag flag-fr"></i></a> <a href="index-en.html"><i class="flag flag-gb"></i></a> </header> <span class="image"><img src="images/pic01.jpg" alt=""></span> <div style="text-align:center; padding-top:30px"> <img src="images/sap.png" alt=""><br> <!-- Facebook Like Badge START --> <iframe src="http://www.facebook.com/plugins/like.php?href=https://www.facebook.com/uncoupdepousse&layout=box_count&show_faces=true&width=65&action=like&font=arial&colorscheme=light&height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:65px; height:65px; margin-top:3px" allowtransparency="true"> </iframe> <!-- Facebook Like Badge END --> </div> </div> <a href="#one" class="goto-next scrolly">Next</a> </section> <!-- One --> <section id="one" class="spotlight style1 bottom"> <span class="image fit main"><img src="images/pic02.jpg" alt=""></span> <div class="content"> <div class="container"> <div class="row"> <div class="4u 12u$(medium)"> <header> <h2>Una ajuda puntal</h2> </header> </div> <div class="4u 12u$(medium)"> <p>Perquè no té ni el temps, mi la capacitat de mantenir els afores de la seva casa, arriba el moment d’una ajuda puntual per aconseguir que la seva casa sigui cada dia més bonica.</p> </div> <div class="4u$ 12u$(medium)"> <p>La talla de la bardissa, de la gespa, la recollida de les fulles…. Retrobi el plaer de tenir uns afores bonics sense esforç. Vinc amb les meves eines, m’enduc les deixalles, i vostè, sempre amb l’esperit tranquil.</p> </div> </div> </div> </div> <a href="#two" class="goto-next scrolly">Next</a> </section> <!-- Two --> <section id="two" class="spotlight style2 right"> <span class="image fit main"><img src="images/pic03.jpg" alt=""></span> <div class="content"> <header> <h3>Menester d’una mà experta en jardinaria ?</h3> <p>Poso les meves competències al seu servei.</p> </header> <p>Fort d’una experiència de 9 anys com a responsable del conreu dels hibernacles del Soler, li aportaré els meus coneixements dins els dominis de la plantació i del manteniment de plantes i flors del seu jardí.</p> <p>A més del mantemiment, l’aconsellaré amb cura per a arranjar de la manera més adequada del seu jardí i l’ajudaré a triar les plantes més adaptades a la seva terra. </p> <!--<ul class="actions">
-						<li><a href="#" class="button">En savoir plus</a></li>
-					</ul>--> </div> <a href="#three" class="goto-next scrolly">Next</a> </section> <!-- Three --> <section id="three" class="spotlight style3 left"> <span class="image fit main bottom"><img src="images/pic04.jpg" alt=""></span> <div class="content"> <header> <h2>Cap menester d’eines,</h2> <p>Em cuido de tot !</p> </header> <p>Li dóna l’ajuda puntual, pero de qualitat. Vinc amb material professional i enduré totes les deixalles. Que aprofiti d’um jardí net i ben arreglat quan hagi passat.</p> <!--<ul class="actions">
-						<li><a href="#" class="button">Learn More</a></li>
-					</ul>--> </div> <a href="#four" class="goto-next scrolly">Next</a> </section> <!-- Four --> <section id="four" class="wrapper style1 special fade-up"> <div class="container"> <header class="major"> <h2>Descobriu els diferents serveis que puc oferir</h2> <p>No deixi de contactar-me per a obtenir més informacions o fer un pressupost.</p> </header> <div class="box alt"> <div class="row uniform"> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff04.png" alt=""></span> <h3>Talla de gespa</h3> <p>Puc intervenir regularment per a mantenir la seva gespa</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff03.png" alt=""></span> <h3>Talla de bardissess</h3> <p>Que em confiï la talla de la seva bardissa si aquesta aconsegueix agafar una dimensió inadequada</p> </section> <section class="4u$ 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff02.png" alt=""></span> <h3>Esbardissament i fulles</h3> <p>Per la tardor, el seu jardí en vesteix de fulles o una part del seu jardí necessita una neteja</p> </section> <section class="4u 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff07.png" alt=""></span> <h3>Regatge</h3> <p>L’ajudo a regar, o més simplement, l’aconsello en quantitat d’aigua en què el seu jardí té menester.</p> </section> <section class="4u 6u(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff05.png" alt=""></span> <h3>Plantació</h3> <p>L’ajudo a decorar els seus afores, en proposar-li plantes i flors en funció dels seus manteniments</p> </section> <section class="4u$ 6u$(medium) 12u$(xsmall)"> <span class="icon alt major"><img src="images/stuff06.png" alt=""></span> <h3>Flors i manteniment</h3> <p>Les flors i arbustes necessiten en manteniment particular, l’ajudo a fer-los créixer i a lluitar contre les malalties.</p> </section> </div> </div> <footer class="major"> <ul class="actions"> <li><a href="contact-ca.html" class="button">Contactar-me</a></li> </ul> </footer> </div> </section> <!-- Five --> <section id="newsletter" class="wrapper style2 special fade"> <div class="container"> <header> <h2>Rebeu consells en jardinaries</h2> <p>En abonar-vos a la newsletter, rebeu regularment consells sobre les taques a realitzar dins el seu jardí, així com l’evolució de les ofertes « ajuda puntual »</p> </header> <form id="news_form" action="#" class="container 50%"> <div class="row uniform 50%" id="news_body"> <div class="7u 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="La meva adreça mail"></div> <div class="5u$ 12u$(xsmall)"><input type="ajaxsubmit" id="submit" value="M’abono !" class="fit special"></div> </div> <div class="row uniform 50%" id="news_results"> </div> </form> </div> </section> <!-- Footer --> <footer id="footer"> <ul class="icons"> <li><a href="contact-ca.html" class="icon alt fa-envelope"><span class="label">Email</span></a></li> <li><a href="https://twitter.com/uncoupdepousse" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> <li><a href="https://www.facebook.com/uncoupdepousse" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li> <li><a href="https://plus.google.com/114787745404768848835" class="icon alt fa-google-plus"><span class="label">Google plus</span></a></li> </ul> <ul class="copyright"> <li>&copy; UnCoupDePouse all rights reserved.</li> <li>Design by VHA</li> <li>Powered by <a href="http://html5up.net">HTML5 UP</a></li> </ul> <ul class="copyright"> <li>Un Coup de Pousse déclaration ministère de l'économie SAP/812935856</li> <li>SIREN : 812 935 856 R.C.S. Perpignan</li> </ul> <ul class="copyright"> <li>T.V.A. non applicable, article 293B du CGI</li> <li><a href="cgv.html">CGV</a></li> </ul> </footer>  
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jardiner a Perpinyà i voltants | Un Coup de Pousse</title>
+  <meta name="description" content="Manteniment de jardins a Perpinyà i voltants. Talla de gespa i de bardisses, desbrossament, reg, plantació i manteniment de flors.">
+  <link rel="canonical" href="https://www.uncoupdepousse.fr/index-ca.html">
+  <link rel="alternate" hreflang="fr" href="https://www.uncoupdepousse.fr/">
+  <link rel="alternate" hreflang="ca" href="https://www.uncoupdepousse.fr/index-ca.html">
+  <link rel="alternate" hreflang="en" href="https://www.uncoupdepousse.fr/index-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.uncoupdepousse.fr/">
+  <link rel="icon" href="assets/logo-un-coup-de-pousse.webp" type="image/webp">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="gallery.css">
+  <script defer src="gallery.js"></script>
+</head>
+<body>
+  <a class="skip" href="#contenu">Ves al contingut</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="header-identity">
+        <a class="brand" href="index-ca.html" aria-current="page">
+          <img class="brand-icon" src="assets/logo-un-coup-de-pousse.webp" alt="" width="44" height="44">
+          <span>un coup<br><strong>de pousse.</strong></span>
+        </a>
+        <a class="header-sap" href="sap.html" aria-label="Serveis a la persona"><img src="assets/logo-services-a-la-personne.png" alt="" width="97" height="81"></a>
+      </div>
+      <nav aria-label="Menú principal">
+        <ul>
+          <li><a href="index-ca.html" aria-current="page">Inici</a></li>
+          <li><a href="newsletter/" hreflang="fr">Newsletter</a></li>
+          <li><a href="sap.html" hreflang="fr">50 % deductible !</a></li>
+          <li><a href="espace-client.html" hreflang="fr">Espai client</a></li>
+          <li><a href="contact-ca.html" class="button">Contactar-me</a></li>
+          <li class="header-google-reviews">
+            <a href="https://www.google.com/maps/place/Un+Coup+de+Pousse+-+Jardinier+-/@45.2989329,4.5786511,6z/data=!4m8!3m7!1s0x12b06fd1e78349ef:0xf36d30f7b50fc64f!8m2!3d45.2989329!4d4.5786511!9m1!1b1!16s%2Fg%2F11c3pwf2xs?entry=ttu&amp;g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D">
+              <span><span class="google-review-star" aria-hidden="true">★</span> <strong>4,9/5 · 78 ressenyes a Google</strong></span>
+              <span class="header-review-action">Veure o deixar un missatge</span>
+            </a>
+          </li>
+          <li>
+            <nav class="header-languages" aria-label="Idiomes">
+              <a href="./" lang="fr" hreflang="fr" aria-label="Français" title="Français"><img src="assets/drapeau-fr.png" alt="" width="32" height="22"></a>
+              <a href="index-ca.html" lang="ca" hreflang="ca" aria-label="Català" title="Català" aria-current="page"><img src="assets/drapeau-ca.png" alt="" width="32" height="22"></a>
+              <a href="index-en.html" lang="en" hreflang="en" aria-label="English" title="English"><img src="assets/drapeau-en.png" alt="" width="32" height="22"></a>
+            </nav>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="contenu" class="shell page">
+    <section class="hero" aria-labelledby="titre-principal">
+      <div class="hero-copy">
+        <h1 id="titre-principal">Jardiner a Perpinyà i voltants</h1>
+        <p class="lead">El vostre jardí té menester de ser curat? Necessita una ajuda puntual?</p>
+        <div class="actions">
+          <a class="button" href="contact-ca.html">Contactar-me</a>
+          <a class="button button-secondary" href="tel:+33630149323">Truqueu a en Romain</a>
+        </div>
+      </div>
+      <img class="feature-photo" src="assets/romain-haese-jardinier.webp" srcset="assets/romain-haese-jardinier-720.webp 720w, assets/romain-haese-jardinier.webp 1440w" sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1280px) 45vw, 550px" alt="En Romain davant d’una bardissa amb el seu remolc" width="1440" height="1080" fetchpriority="high">
+    </section>
+    <section class="section" aria-labelledby="serveis">
+      <div class="section-heading">
+        <h2 id="serveis">Descobriu els diferents serveis que puc oferir</h2>
+        <p>No deixi de contactar-me per a obtenir més informacions o fer un pressupost.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img class="card-photo" src="assets/tondeuse-et-materiel-720.webp" alt="Tallagespa i material de jardineria" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Talla de gespa</h3>
+          <p>Puc intervenir regularment per a mantenir la seva gespa</p>
+          <a href="tonte-de-gazon.html" hreflang="fr" aria-label="Veure el servei de talla de gespa (en francès)">Veure el servei (en francès)</a>
+        </article>
+        <article class="card">
+          <img class="card-photo" src="assets/outil-taille-haies-720.webp" alt="Tallabardisses sobre branques tallades" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Talla de bardisses</h3>
+          <p>Que em confiï la talla de la seva bardissa si aquesta aconsegueix agafar una dimensió inadequada</p>
+          <a href="taille-de-haies.html" hreflang="fr" aria-label="Veure el servei de talla de bardisses (en francès)">Veure el servei (en francès)</a>
+        </article>
+        <article class="card">
+          <img class="card-photo" src="assets/debroussaillage-jardin-720.webp" alt="Un jardiner talla herbes altes amb una desbrossadora" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Esbardissament i fulles</h3>
+          <p>Per la tardor, el seu jardí en vesteix de fulles o una part del seu jardí necessita una neteja</p>
+          <a href="debroussaillage.html" hreflang="fr" aria-label="Veure el servei d’esbardissament (en francès)">Veure el servei (en francès)</a>
+        </article>
+        <article class="card">
+          <img class="card-photo" src="assets/feuillage-jardin-720.webp" alt="Cel blau entre branques d’arbres vistes des de sota" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Regatge</h3>
+          <p>Us ajudo amb el reg i us aconsello sobre les necessitats d’aigua del vostre jardí. Abans de regar, consulteu les restriccions d’aigua vigents al vostre municipi.</p>
+          <a href="arrosage.html" hreflang="fr" aria-label="Veure el servei de regatge (en francès)">Veure el servei (en francès)</a>
+        </article>
+        <article class="card">
+          <img class="card-photo" src="assets/massif-ornemental-720.webp" alt="Parterre i plantes ornamentals" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Plantació</h3>
+          <p>Us aconsello en la tria dels vegetals i planto els que compreu vosaltres.</p>
+          <a href="plantation.html" hreflang="fr" aria-label="Veure el servei de plantació (en francès)">Veure el servei (en francès)</a>
+        </article>
+        <article class="card">
+          <img class="card-photo" src="assets/arbustes-au-jardin-720.webp" alt="Arbustos frondosos al costat d’un pas del jardí" width="720" height="540" loading="lazy" decoding="async">
+          <h3>Flors i manteniment</h3>
+          <p>Les flors i arbustes necessiten en manteniment particular, l’ajudo a fer-los créixer i a lluitar contre les malalties.</p>
+          <a href="fleurs-et-entretien.html" hreflang="fr" aria-label="Veure el servei de manteniment de flors i arbustos (en francès)">Veure el servei (en francès)</a>
+        </article>
+      </div>
+    </section>
+    <section class="section story" aria-labelledby="experience">
+      <section class="gallery" aria-labelledby="photos-de-realisations" data-gallery>
+        <div class="section-heading">
+          <h2 id="photos-de-realisations">Alguns dels meus treballs al jardí</h2>
+        </div>
+        <div class="gallery-controls" hidden>
+          <button class="button button-secondary" type="button" data-gallery-toggle>Posa en pausa</button>
+          <button class="button button-secondary" type="button" data-gallery-previous>Anterior</button>
+          <button class="button button-secondary" type="button" data-gallery-next>Següent</button>
+          <span class="gallery-count" aria-hidden="true" data-gallery-count></span>
+        </div>
+        <div class="gallery-photos" tabindex="0" role="group" aria-label="Fotos per desplaçar horitzontalment">
+          <figure class="gallery-slide">
+            <img src="assets/avant-apres-allee-gravier.webp" srcset="assets/avant-apres-allee-gravier-720.webp 720w, assets/avant-apres-allee-gravier.webp 1100w" sizes="(max-width: 640px) calc(100vw - 2rem), min(36rem, 44vw)" width="1100" height="1100" loading="lazy" decoding="async" draggable="false" alt="Abans i després del manteniment d’un camí de grava vorejat de vegetació">
+            <figcaption class="gallery-caption">Manteniment d’un camí de grava</figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="assets/avant-apres-entretien-jardin.webp" srcset="assets/avant-apres-entretien-jardin-720.webp 720w, assets/avant-apres-entretien-jardin.webp 1100w" sizes="(max-width: 640px) calc(100vw - 2rem), min(36rem, 44vw)" width="1100" height="1100" loading="lazy" decoding="async" draggable="false" alt="Abans i després del manteniment d’un jardí amb una olivera i un camí">
+            <figcaption class="gallery-caption">Posada a punt d’un jardí al voltant d’una olivera</figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="assets/avant-apres-degagement-massif.webp" srcset="assets/avant-apres-degagement-massif-720.webp 720w, assets/avant-apres-degagement-massif.webp 1100w" sizes="(max-width: 640px) calc(100vw - 2rem), min(36rem, 44vw)" width="1100" height="1100" loading="lazy" decoding="async" draggable="false" alt="Abans i després de retirar vegetació d’un parterre">
+            <figcaption class="gallery-caption">Neteja de vegetació en un parterre</figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="assets/debroussaillage-jardin.webp" srcset="assets/debroussaillage-jardin-720.webp 720w, assets/debroussaillage-jardin.webp 1440w" sizes="(max-width: 640px) calc(100vw - 2rem), min(36rem, 44vw)" width="1440" height="1080" loading="lazy" decoding="async" draggable="false" alt="Un jardiner desbrossa un terreny">
+            <figcaption class="gallery-caption">Desbrossament en curs</figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="assets/avant-apres-terrain-debroussaille.webp" srcset="assets/avant-apres-terrain-debroussaille-720.webp 720w, assets/avant-apres-terrain-debroussaille.webp 961w" sizes="(max-width: 640px) calc(100vw - 2rem), min(36rem, 44vw)" width="961" height="1100" loading="lazy" decoding="async" draggable="false" alt="Abans i després de desbrossar un terreny al voltant d’una casa">
+            <figcaption class="gallery-caption">Manteniment del terreny al voltant d’una casa</figcaption>
+          </figure>
+        </div>
+        <p class="gallery-announcement" aria-live="polite" aria-atomic="true" data-gallery-announcement></p>
+      </section>
+      <div class="story-copy">
+        <h2 id="experience">Una ajuda puntual</h2>
+        <p>Perquè no té ni el temps, mi la capacitat de mantenir els afores de la seva casa, arriba el moment d’una ajuda puntual per aconseguir que la seva casa sigui cada dia més bonica.</p>
+        <p>La talla de la bardissa, de la gespa, la recollida de les fulles…. Retrobi el plaer de tenir uns afores bonics sense esforç. Vinc amb les meves eines, m’enduc les deixalles, i vostè, sempre amb l’esperit tranquil.</p>
+        <h2>Menester d’una mà experta en jardineria?</h2>
+        <p>Poso les meves competències al seu servei.</p>
+        <p>Fa 11 anys que exerceixo de jardiner, després de 9 anys com a responsable de cultiu als hivernacles del Soler. Aporto els meus coneixements sobre la plantació i el manteniment de plantes i flors al vostre jardí.</p>
+        <p>A més del mantemiment, l’aconsellaré amb cura per a arranjar de la manera més adequada del seu jardí i l’ajudaré a triar les plantes més adaptades a la seva terra.</p>
+        <h2>Em cuido de tot!</h2>
+        <p>Li dóna l’ajuda puntual, pero de qualitat. Vinc amb material professional i enduré totes les deixalles. Que aprofiti d’um jardí net i ben arreglat quan hagi passat.</p>
+      </div>
+    </section>
+    <section class="card prose" aria-labelledby="newsletter">
+      <h2 id="newsletter">Rebeu consells de jardineria</h2>
+      <p>Consells sobre les feines del vostre jardí i novetats d’Un Coup de Pousse.</p>
+      <div class="actions">
+        <a class="button button-secondary" href="newsletter/" hreflang="fr">Llegiu la newsletter en francès</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <strong>Un Coup de Pousse</strong>
+        <p>Declaració de serveis a la persona SAP/812935856 · SIREN 812 935 856</p>
+      </div>
+      <nav class="languages" aria-label="Idiomes">
+        <a href="./" lang="fr" hreflang="fr">Français</a>
+        <a href="index-ca.html" lang="ca" hreflang="ca" aria-current="page">Català</a>
+        <a href="index-en.html" lang="en" hreflang="en">English</a>
+        <a href="cgv.html" hreflang="fr">Condicions de venda</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
