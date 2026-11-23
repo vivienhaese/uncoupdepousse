@@ -72,6 +72,34 @@ nav a:not(.button):hover, nav a:not(.button)[aria-current="page"] { color: var(-
 .water-rule-description { white-space: pre-line; }
 .water-checked { font-size: .88rem; }
 
+.fire-notice { background: #faf7ed; border-bottom: 1px solid #e8dfc8; }
+.page > .fire-notice { margin-bottom: 1.45rem; border: 1px solid #e8dfc8; border-radius: .75rem; }
+.fire-notice-inner { display: grid; gap: .2rem; padding-block: .8rem; }
+.page > .fire-notice .fire-notice-inner { padding-inline: 1rem; }
+.fire-notice h2 { font-size: 1.06rem; letter-spacing: -.02em; line-height: 1.35; }
+.fire-notice p, .fire-map-links { font-size: .92rem; }
+.fire-map summary {
+  width: fit-content;
+  min-height: 2.75rem;
+  padding-block: .55rem;
+  color: var(--green-deep);
+  cursor: pointer;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: .19em;
+}
+.fire-map-links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-block: .5rem .65rem; }
+.fire-map-links a { display: inline-block; padding-block: .35rem; }
+.fire-map iframe {
+  display: block;
+  width: 100%;
+  height: min(36rem, 70vh);
+  min-height: 20rem;
+  border: 1px solid #e8dfc8;
+  border-radius: .55rem;
+  background: var(--white);
+}
+
 .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 4.3rem); padding-block: clamp(2.15rem, 5vw, 4.6rem); }
 .hero-copy, .story-copy, .page-heading { display: grid; gap: 1rem; }
 .hero-kicker { color: var(--green); font-weight: 660; }
